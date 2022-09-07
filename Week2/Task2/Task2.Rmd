@@ -1,0 +1,88 @@
+---
+title: "HappyLittleMarkdown"
+author: "Ellesa Henning"
+date: "9/7/2022"
+output: 
+  html_document:
+    theme: spacelab
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Ever wonder what the sine of pi/4ths is?
+
+```{r}
+sin(pi/4)
+```
+
+###KAPOW!
+...
+Anyway.
+
+```{r}
+x <- 10/3
+```
+
+Variable names must start with a letter, but after that first letter can contain letters, numbers, underscores, and periods. Opt for descriptive names, preferably all lowercase words separated by underscores.
+
+Allowed:
+snake_man
+SNAKEY.BOI
+SnAkE5_1n_h4t5
+
+Not Allowed:
+5nake_man (cannot start with numbers)
+snake&boy (cannot contain symbols other than '_' and '.')
+_.epic yo (must start with letter, cannot contain spaces or bad things will happen)
+
+```{r}
+(one2fifty <- seq(1,50, length.out = 7))
+
+my_vector <- c(1, 5, 12, 31, 19)
+
+7+5==12
+```
+
+The sign '==' is basically a question mark. Is the left value equal to the right? If yes, it outputs a 'TRUE' and if not, a 'FALSE'.
+
+```{r}
+(7+4==12|5-4==1)
+```
+
+This statement is true, because the '|' means 'OR'. While 7+4==12 outputs a 'FALSE', 5-4==1 outputs a 'TRUE, which is all that's required for a final 'TRUE' result.
+
+### Chapter 4
+##### Problems 1-3
+
+###### 1.
+I'm not entirely sure what the second 'i' is (or more accurately, not 'i'), but it's not the same character as is in the top variable, and is therefore not the same variable. 
+
+###### 2.
+```{r, eval = FALSE}
+library(tidyverse)
+
+ggplot(dota = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+fliter(mpg, cyl = 8)
+filter(diamond, carat > 3)
+```
+
+The error givent is that the object 'displ' is not found. This is because a typo was made earlier, with the variable being 'dota' instead of 'data'. Later, the error will be about another typo later, in which the variable is 'fliter' instead of 'filter', along with an equal sign instead of a double equal sign, and the dataset is called 'diamonds' not 'diamond'.
+
+```{r, warning=FALSE}
+library(tidyverse)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+filter(mpg, cyl == 8)
+filter(diamonds, carat > 3)
+```
+
+###### 3.
+The combination Alt + Shift + K produces a list of keyboard shortcuts. These can also be accessed from the Help Menu. 
