@@ -1,0 +1,54 @@
+---
+title: 'CS2: Coral Bleaching'
+author: "Ellesa Henning"
+date: "9/6/2022"
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Case Study #2: Coral Bleaching
+
+Link to the data set I'm using:
+<https://github.com/WJC-Data-Science/DTS350/raw/master/coral.csv>
+
+
+### Number of coral bleaching events
+```{r bar, echo=FALSE}
+library(tidyverse)
+
+urlfile="https://github.com/WJC-Data-Science/DTS350/raw/master/coral.csv"
+mydata <- read_csv(url(urlfile))
+
+ggplot(data=mydata, mapping = aes(x = Year, fill = Event, weight=Value)) +
+  geom_bar() +
+  facet_wrap(~Entity, scales = 'free') +
+  theme_bw() +
+  theme(legend.position = 'top') +
+  scale_fill_manual(values = c("#6699CC", "#CC6666"))
+```
+
+This data shows that coral bleaching is becoming more frequent, as there are more large scale incidents with fewer years between them. 
+
+
+### Number of coral bleaching events, Line Graph edition
+
+```{r pressure, echo=FALSE}
+ggplot(data=mydata, mapping=aes(x=Year, y=Value, group=Event, color = Event)) +
+  geom_line() +
+  facet_wrap(~Entity, scales = 'free') +
+  theme_bw() +
+  theme(legend.position = 'top') +
+  scale_color_manual(values = c("#6699CC", "#CC6666"))
+
+```
+
+Personally, it made more sense for the data to be in a line graph than a bar graph, and for the moderate and severe data trends to be looked at separately, rather than as additions to each other. This data shows that while moderate coral bleaching appears to be steadily increasing over the world, severe bleaching comes in spikes, most likely related to some sort of ecological disaster. It would be more interesting to cross reference the severe spikes with various possible factors that would lead to coral bleaching.
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
