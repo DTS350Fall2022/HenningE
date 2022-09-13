@@ -1,0 +1,42 @@
+---
+title: "Case Study 3"
+author: "Ellesa Henning"
+date: "2022-09-13"
+output: 
+  html_document:
+  keep_md: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+##Case Study 3: Wealth and Life Expectancy
+
+Kuwait is removed from the data, and graphs of GDP per capita vs life expectancy, and vs year were made.
+
+```{r}
+library(tidyverse)
+library(gapminder)
+data <- mutate(filter(gapminder, country != 'Kuwait'),
+              Population_100k = pop / 100000)
+avg_data <- group_by(data, year, continent) %>%
+  mutate(avgs = weighted.mean(gdpPercap, Population_100k, na.rm = TRUE), 
+         Population_100k_=sum(Population_100k))
+
+ggplot(data = data,
+       mapping = aes(x=lifeExp, y=gdpPercap, size=Population_100k, color=continent)) +
+  geom_point() +
+  facet_wrap(~year) +
+  scale_y_continuous(trans = 'sqrt') +
+  theme_bw() +
+  labs(x="Life Expectancy", y="GDP per capita")
+
+ggplot(group_by(avg_data, country), aes(x=year, y=gdpPercap, color=continent)) +
+  geom_point(aes(size=Population_100k)) +
+  geom_path() +
+  geom_point(aes(y=avgs, size=Population_100k_), color='black') +
+  facet_wrap(~continent)
+
+```
